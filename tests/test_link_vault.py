@@ -117,7 +117,10 @@ def test_tag_stats(tmp_db, capsys):
     assert "python" in out
 
 def test_collection_create(tmp_db, capsys):
-    args = MagicMock(name="my-list", description="Test", color="#FF0000")
+    args = MagicMock()
+    args.name = "my-list"
+    args.description = "Test"
+    args.color = "#FF0000"
     lv.cmd_collection_create(args)
     db  = lv.get_db()
     row = db.execute("SELECT * FROM collections WHERE name='my-list'").fetchone()
